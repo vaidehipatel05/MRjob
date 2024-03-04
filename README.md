@@ -1,28 +1,22 @@
-# MRjob
+# Real time alpaca api 
+All the python scripts are loaded to check in the whether the real time data is getting fetched or not.
 
-This repository contains all xmk files required to configure and run hadoop successfull.
+Zookeeper start cmd:
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 
-For Hadoop requirement is that JAVA shoulbe no more than version JAVA 8.
+Kafka start cmd:
+.\bin\windows\kafka-server-start.bat .\config\server.properties
 
-For Mac, the command that worked for me is,
-brew install --cask homebrew/cask-versions/adoptopenjdk8
+For the Hadoop,
+we use jdk 1.8 version and to run hadoop on the windows we use the following commands:
+start-all.cmd
+start-yarn.cmd
 
-All hadoop jar files on MAC are stored under,
-/opt/homebrew/Cellar/hadoop/3.3.6/libexec/share/hadoop/tools/lib/
+Now to run Apache Hive we need to start the server in the new command prompt:
+StartNetworkServer -h 0.0.0.0
 
-Proper syntax for running mapper reducer code is,
-Syntax:
-Path_to_hadoop_installation hadoop jar path_to_hadoop-streaming_jar_files -files path_to_files_to_be_copied_to_distributed_cache -mapper specify_script_to_run -reducer specify_script_to_run -input path_to_hdfs_input_files -output path_to_hdfs_output_file
+And now go to the C:/hive/bin path and run the command and check whether the data is processed and fetched in hive:
+just type hive then the hive shell will start.
 
-
-Example,
-/opt/homebrew/Cellar/hadoop/3.3.6/libexec/bin/hadoop jar /opt/homebrew/Cellar/hadoop/3.3.6/libexec/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
--files /opt/homebrew/Cellar/hadoop/mapper.py,/opt/homebrew/Cellar/hadoop/reducer.py \
--mapper mapper.py \
--reducer reducer.py \
--input /code/pg5000.txt \
--output /code/output
-
-When you run MRjob, you will see "reading from STDIN" this output when mapper successfully sends key-value pair to reducer.
-
-python3 m11.py cleaned_comments.csv  | python3 r11.py > output11
+For the grafana:
+run the grafana-server by running as administrator and use localhost:8080 to run your machine.
